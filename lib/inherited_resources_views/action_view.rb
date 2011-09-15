@@ -18,7 +18,8 @@ module InheritedResourcesViews
       def find_template(original_template_path, format = nil, html_fallback = true)
         super
       rescue ::ActionView::MissingTemplate
-        original_template_path.sub!(/^[\w]+/, "inherited_resources")
+        # http://rubular.com/r/DcPvglzGLh
+        original_template_path.sub!(/^[\w\/]+(\/[\w.]+)$/, 'inherited_resources\1')
         super
       end
     end
